@@ -5,9 +5,13 @@
 package tp_pgm;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.*;
 
 /**
  *
@@ -30,16 +34,40 @@ public class TP_PGM {
         int maxVal = s.nextInt();
         int[][] image = new int[height][width];
         System.out.println(maxVal);
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < width ; i++) {
             for (int j = 0; j < height; j++) {
                 image[i][j] = d.nextInt();
-                System.out.println(image[i][j]);
             }
         }
 
+        d = new Scanner(System.in);
+
+        System.out.print("Enter the file name: ");
+
+        String fileName = d.nextLine();
+        try {
+            FileOutputStream fos = new FileOutputStream(fileName);
+            PrintStream ps = new PrintStream(fos);// Write the .pgm header (P2, width height, maxVal)
+            ps.println("P2");
+            ps.println("#");
+            ps.println( height+ " "  + width );
+            ps.println(maxVal);
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width ; j++) {
+                    ps.print(image[i][j]);
+                    // Separate numbers by space
+                    ps.print(" ");
+                }
+                // Make each image line a separate text line for
+                // easier viewing in a text editor
+                ps.println();
+            }
+
+            ps.close();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
 }
-
-
-
