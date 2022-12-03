@@ -69,5 +69,6 @@ public class TP_PGM {
             System.out.println(e);
         }
     }
+    int x=1;
 
 }
