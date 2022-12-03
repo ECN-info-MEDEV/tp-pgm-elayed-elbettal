@@ -70,5 +70,5 @@ public class TP_PGM {
         }
     }
     int x=1;
-
+int y;
 }
